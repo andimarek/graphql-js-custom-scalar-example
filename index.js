@@ -10,7 +10,8 @@ const {
 } = require("graphql");
 
 /*
-This is an example custom scalar implementation for the blog post: 
+This is an example custom scalar implementation for 
+the blog post https://www.graphql.de/blog/scalars-in-depth/
 
 NOT PRODUCTION READY CODE!
 */
