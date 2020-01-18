@@ -1,4 +1,4 @@
-# Custom GraphQL scalar example
+# Custom GraphQL Scalar example
 
 This is the source code for the custom Money Scalar 
 in this blog post: https://www.graphql.de/blog/scalars-in-depth/
