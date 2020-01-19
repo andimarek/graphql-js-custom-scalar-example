@@ -117,11 +117,13 @@ const schema = new GraphQLSchema({
     query: queryType,
 });
 
-const executeQuery = (query) => {
-    graphql(schema, query).then(result => {
+const executeQuery = (query, variableValues) => {
+    graphql(schema, query, null, null, variableValues).then(result => {
         console.log(JSON.stringify(result));
     });
 };
 
 executeQuery('{ echo(money: "49.99") }');
 executeQuery('{ echo(money: 4999) }');
+executeQuery('query MyQuery($var: Money!){ echo(money: $var) }', { var: new Money(49, 99) });
+
