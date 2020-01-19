@@ -64,6 +64,20 @@ const moneyScalar = new GraphQLScalarType({
             `Invalid value from resolver for Money ${value}`,
         );
     },
+    // literal input coercion
+    // returns Money object
+    parseLiteral(ast) {
+        if (ast.kind === Kind.STRING) {
+            return parseMoneyString(ast.value);
+        }
+        if (ast.kind == Kind.INT) {
+            const cents = parseInt(ast.value);
+            return parseCentsNumber(cents);
+        }
+        throw new GraphQLError(
+            `Invalid literal for money ${print(ast)}`,
+        );
+    },
     // value input coercion
     // returns Money object
     parseValue(value) {
@@ -82,20 +96,6 @@ const moneyScalar = new GraphQLScalarType({
             `Invalid input value for Money ${value}`,
         );
     },
-    // literal input coercion
-    // returns Money object
-    parseLiteral(ast) {
-        if (ast.kind === Kind.STRING) {
-            return parseMoneyString(ast.value);
-        }
-        if (ast.kind == Kind.INT) {
-            const cents = parseInt(ast.value);
-            return parseCentsNumber(cents);
-        }
-        throw new GraphQLError(
-            `Invalid literal for money ${print(ast)}`,
-        );
-    }
 });
 
 const echoResolver = (root, { money }) => {
